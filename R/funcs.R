@@ -98,7 +98,7 @@ print.summary.mylm <- function(mylmobj_summary) {
     cat("\nCoefficients:\n")
     print(coeftab)
     cat("---\n")
-    cat("Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n")
+    cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n")
     cat("\n")
     cat("Residual standard error: ",sigma," on ",df.residual," degrees of freedom\n")
     cat("Multiple R-squared: "); cat(r.squared); cat(" ");

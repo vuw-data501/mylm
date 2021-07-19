@@ -12,6 +12,17 @@
   level = 0.95
 )
 }
+\arguments{
+\item{mylmobj}{mylm object}
+
+\item{newdata}{An optional data frame in which to look for variables with which to predict. If omitted, the fitted values are used.}
+
+\item{se.fit}{A switch indicating if standard errors are required (default = FALSE).}
+
+\item{interval}{Type of interval calculation, can be "none", "confidence" or "prediction". Can be abbreviated.}
+
+\item{level}{The confidence level required (default = 0.95).}
+}
 \description{
 Predicted values
 }

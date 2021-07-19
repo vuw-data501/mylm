@@ -6,6 +6,9 @@
 \usage{
 \method{fitted}{mylm}(mylmobj)
 }
+\arguments{
+\item{mylmobj}{mylm object}
+}
 \description{
 Fitted values
 }

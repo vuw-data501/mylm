@@ -6,6 +6,9 @@
 \usage{
 \method{residuals}{mylm}(mylmobj)
 }
+\arguments{
+\item{mylmobj}{mylm object}
+}
 \description{
 Residuals
 }

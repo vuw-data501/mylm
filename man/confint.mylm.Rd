@@ -6,6 +6,13 @@
 \usage{
 \method{confint}{mylm}(mylmobj, parm = NULL, level = 0.95)
 }
+\arguments{
+\item{mylmobj}{mylm object}
+
+\item{parm}{A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.}
+
+\item{level}{The confidence level required (default = 0.95).}
+}
 \description{
 Confidence intervals for parameters
 }

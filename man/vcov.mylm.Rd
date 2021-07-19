@@ -6,6 +6,9 @@
 \usage{
 \method{vcov}{mylm}(mylmobj)
 }
+\arguments{
+\item{mylmobj}{mylm object}
+}
 \description{
 Variance covariance matricx for parameters
 }

@@ -1,5 +1,11 @@
 #' Fit a linear model
 #'
+#' @param formula an object of class "formula" (or one that can be coerced to that class) a symbolic description of the model to be fitted. The details of model specification are given under ‘Details’.
+#'
+#' @param data an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model. If not found in data, the variables are taken from environment(formula), typically the environment from which lm is called.
+#'
+#' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
+#'
 #' @export
 mylm <- function(formula, data, subset=NULL) {
 
@@ -115,6 +121,8 @@ print.summary.mylm <- function(mylmobj_summary) {
 
 #' Variance covariance matricx for parameters
 #'
+#' @param mylmobj mylm object
+#'
 #' @export
 vcov.mylm <- function(mylmobj) {
   with(mylmobj, {
@@ -123,6 +131,12 @@ vcov.mylm <- function(mylmobj) {
 }
 
 #' Confidence intervals for parameters
+#'
+#' @param mylmobj mylm object
+#'
+#' @param parm A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.
+#'
+#' @param level The confidence level required (default = 0.95).
 #'
 #' @export
 confint.mylm <- function(mylmobj, parm=NULL, level=0.95) {
@@ -139,6 +153,8 @@ confint.mylm <- function(mylmobj, parm=NULL, level=0.95) {
 
 #' Fitted values
 #'
+#' @param mylmobj mylm object
+#'
 #' @export
 fitted.mylm <- function(mylmobj) {
   with(mylmobj, {
@@ -148,6 +164,8 @@ fitted.mylm <- function(mylmobj) {
 
 #' Residuals
 #'
+#' @param mylmobj mylm object
+#'
 #' @export
 residuals.mylm <- function(mylmobj) {
   with(mylmobj, {
@@ -156,6 +174,16 @@ residuals.mylm <- function(mylmobj) {
 }
 
 #' Predicted values
+#'
+#' @param mylmobj mylm object
+#'
+#' @param newdata An optional data frame in which to look for variables with which to predict. If omitted, the fitted values are used.
+#'
+#' @param se.fit A switch indicating if standard errors are required (default = FALSE).
+#'
+#' @param interval Type of interval calculation, can be "none", "confidence" or "prediction". Can be abbreviated.
+#'
+#' @param level The confidence level required (default = 0.95).
 #'
 #' @export
 predict.mylm <- function(mylmobj, newdata=NULL, se.fit=FALSE,
@@ -185,6 +213,12 @@ predict.mylm <- function(mylmobj, newdata=NULL, se.fit=FALSE,
   })
 }
 
+#' Plotting
+#'
+#' @param mylmobj mylm object
+#'
+#' @param ... additional arguments to be passed to methods, such as graphical parameters such as \code{par}.
+#'
 #' @export
 plot.mylm <- function(mylmobj, ...) {
   with(mylmobj, {

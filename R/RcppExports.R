@@ -3,6 +3,8 @@
 
 #' Row Sums
 #'
+#' @param x an array of two or more dimensions, containing numeric, complex, integer or logical values, or a numeric data frame.
+#'
 #' @export
 rowSumsC <- function(x) {
     .Call(`_mylm_rowSumsC`, x)

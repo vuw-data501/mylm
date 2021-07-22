@@ -51,22 +51,22 @@ signif_codes <- function(pvals) {
 
 #' Summary method for mylm
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @export
-summary.mylm <- function(mylmobj) {
-  mylmobj_summary <- mylmobj
+summary.mylm <- function(object) {
+  mylmobj_summary <- object
   class(mylmobj_summary) <- "summary.mylm"
   return(mylmobj_summary)
 }
 
 #' Print method for mylm
 #'
-#' @param mylmobj mylm object
+#' @param x object of class "mylm"
 #'
 #' @export
-print.mylm <- function(mylmobj) {
-  with(mylmobj, {
+print.mylm <- function(x) {
+  with(x, {
     cat("Linear model mylm object\n")
     cat("\nCall:\n")
     print(call)
@@ -79,11 +79,11 @@ print.mylm <- function(mylmobj) {
 
 #' Print method for summary(mylm)
 #'
-#' @param mylmobj_summary Summary object
+#' @param x object of class "summary.mylm"
 #'
 #' @export
-print.summary.mylm <- function(mylmobj_summary) {
-  with(mylmobj_summary, {
+print.summary.mylm <- function(x) {
+  with(x, {
     cat("Linear model mylm object\n")
     cat("\nCall:\n")
     print(call)
@@ -121,26 +121,26 @@ print.summary.mylm <- function(mylmobj_summary) {
 
 #' Variance covariance matricx for parameters
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @export
-vcov.mylm <- function(mylmobj) {
-  with(mylmobj, {
+vcov.mylm <- function(object) {
+  with(object, {
     return(vcov)
   })
 }
 
 #' Confidence intervals for parameters
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @param parm A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.
 #'
 #' @param level The confidence level required (default = 0.95).
 #'
 #' @export
-confint.mylm <- function(mylmobj, parm=NULL, level=0.95) {
-  with(mylmobj, {
+confint.mylm <- function(object, parm=NULL, level=0.95) {
+  with(object, {
     se <- sqrt(diag(vcov))
     tval <- qt(1-(1-level)/2, df=df.residual, lower.tail=TRUE)
     retval <- cbind(coef-tval*se, coef+tval*se)
@@ -153,29 +153,29 @@ confint.mylm <- function(mylmobj, parm=NULL, level=0.95) {
 
 #' Fitted values
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @export
-fitted.mylm <- function(mylmobj) {
-  with(mylmobj, {
+fitted.mylm <- function(object) {
+  with(object, {
     return(fitted.values)
   })
 }
 
 #' Residuals
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @export
-residuals.mylm <- function(mylmobj) {
-  with(mylmobj, {
+residuals.mylm <- function(object) {
+  with(object, {
     return(residuals)
   })
 }
 
 #' Predicted values
 #'
-#' @param mylmobj mylm object
+#' @param object object of class "mylm"
 #'
 #' @param newdata An optional data frame in which to look for variables with which to predict. If omitted, the fitted values are used.
 #'
@@ -186,13 +186,13 @@ residuals.mylm <- function(mylmobj) {
 #' @param level The confidence level required (default = 0.95).
 #'
 #' @export
-predict.mylm <- function(mylmobj, newdata=NULL, se.fit=FALSE,
+predict.mylm <- function(object, newdata=NULL, se.fit=FALSE,
                          interval=c("none", "confidence", "prediction"),
                          level=0.95) {
-  with(mylmobj, {
-    if(is.null(newdata)) newdata <- mylmobj$data
-    xmat.new <- model.matrix(mylmobj$formula, data=newdata)
-    fitval <- as.vector(xmat.new%*%mylmobj$coef)
+  with(object, {
+    if(is.null(newdata)) newdata <- object$data
+    xmat.new <- model.matrix(object$formula, data=newdata)
+    fitval <- as.vector(xmat.new%*%object$coef)
     retval <- list(fit=fitval)
     if(se.fit || interval!="none") {
        se.val <- sqrt(diag(xmat.new%*%vcov%*%t(xmat.new)))
@@ -215,13 +215,13 @@ predict.mylm <- function(mylmobj, newdata=NULL, se.fit=FALSE,
 
 #' Plotting
 #'
-#' @param mylmobj mylm object
+#' @param x object of class "mylm"
 #'
 #' @param ... additional arguments to be passed to methods, such as graphical parameters such as \code{par}.
 #'
 #' @export
-plot.mylm <- function(mylmobj, ...) {
-  with(mylmobj, {
+plot.mylm <- function(x, ...) {
+  with(x, {
     plot(data[,yname], fitted.values,
          xlab="Observed", ylab="Fitted",
          ...)

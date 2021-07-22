@@ -5,15 +5,16 @@
 \title{Predicted values}
 \usage{
 \method{predict}{mylm}(
-  mylmobj,
+  object,
   newdata = NULL,
   se.fit = FALSE,
   interval = c("none", "confidence", "prediction"),
-  level = 0.95
+  level = 0.95,
+  ...
 )
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
 
 \item{newdata}{An optional data frame in which to look for variables with which to predict. If omitted, the fitted values are used.}
 
@@ -22,6 +23,8 @@
 \item{interval}{Type of interval calculation, can be "none", "confidence" or "prediction". Can be abbreviated.}
 
 \item{level}{The confidence level required (default = 0.95).}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Predicted values

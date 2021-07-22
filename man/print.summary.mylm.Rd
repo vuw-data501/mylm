@@ -4,10 +4,12 @@
 \alias{print.summary.mylm}
 \title{Print method for summary(mylm)}
 \usage{
-\method{print}{summary.mylm}(mylmobj_summary)
+\method{print}{summary.mylm}(x, ...)
 }
 \arguments{
-\item{mylmobj_summary}{Summary object}
+\item{x}{object of class "summary.mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Print method for summary(mylm)

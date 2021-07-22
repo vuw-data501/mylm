@@ -4,10 +4,12 @@
 \alias{vcov.mylm}
 \title{Variance covariance matricx for parameters}
 \usage{
-\method{vcov}{mylm}(mylmobj)
+\method{vcov}{mylm}(object, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Variance covariance matricx for parameters

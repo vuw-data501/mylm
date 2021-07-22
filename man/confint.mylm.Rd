@@ -4,14 +4,16 @@
 \alias{confint.mylm}
 \title{Confidence intervals for parameters}
 \usage{
-\method{confint}{mylm}(mylmobj, parm = NULL, level = 0.95)
+\method{confint}{mylm}(object, parm = NULL, level = 0.95, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
 
 \item{parm}{A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.}
 
 \item{level}{The confidence level required (default = 0.95).}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Confidence intervals for parameters

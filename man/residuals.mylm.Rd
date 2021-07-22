@@ -4,10 +4,12 @@
 \alias{residuals.mylm}
 \title{Residuals}
 \usage{
-\method{residuals}{mylm}(mylmobj)
+\method{residuals}{mylm}(object, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Residuals

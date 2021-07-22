@@ -4,10 +4,10 @@
 \alias{plot.mylm}
 \title{Plotting}
 \usage{
-\method{plot}{mylm}(mylmobj, ...)
+\method{plot}{mylm}(x, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{x}{object of class "mylm"}
 
 \item{...}{additional arguments to be passed to methods, such as graphical parameters such as \code{par}.}
 }

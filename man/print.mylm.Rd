@@ -4,10 +4,12 @@
 \alias{print.mylm}
 \title{Print method for mylm}
 \usage{
-\method{print}{mylm}(mylmobj)
+\method{print}{mylm}(x, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{x}{object of class "mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Print method for mylm

@@ -4,10 +4,12 @@
 \alias{summary.mylm}
 \title{Summary method for mylm}
 \usage{
-\method{summary}{mylm}(mylmobj)
+\method{summary}{mylm}(object, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Summary method for mylm

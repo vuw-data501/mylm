@@ -52,9 +52,11 @@ signif_codes <- function(pvals) {
 #' Summary method for mylm
 #'
 #' @param object object of class "mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-summary.mylm <- function(object) {
+summary.mylm <- function(object,...) {
   mylmobj_summary <- object
   class(mylmobj_summary) <- "summary.mylm"
   return(mylmobj_summary)
@@ -63,9 +65,11 @@ summary.mylm <- function(object) {
 #' Print method for mylm
 #'
 #' @param x object of class "mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-print.mylm <- function(x) {
+print.mylm <- function(x,...) {
   with(x, {
     cat("Linear model mylm object\n")
     cat("\nCall:\n")
@@ -80,9 +84,11 @@ print.mylm <- function(x) {
 #' Print method for summary(mylm)
 #'
 #' @param x object of class "summary.mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-print.summary.mylm <- function(x) {
+print.summary.mylm <- function(x,...) {
   with(x, {
     cat("Linear model mylm object\n")
     cat("\nCall:\n")
@@ -122,9 +128,11 @@ print.summary.mylm <- function(x) {
 #' Variance covariance matricx for parameters
 #'
 #' @param object object of class "mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-vcov.mylm <- function(object) {
+vcov.mylm <- function(object,...) {
   with(object, {
     return(vcov)
   })
@@ -137,9 +145,11 @@ vcov.mylm <- function(object) {
 #' @param parm A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.
 #'
 #' @param level The confidence level required (default = 0.95).
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-confint.mylm <- function(object, parm=NULL, level=0.95) {
+confint.mylm <- function(object, parm=NULL, level=0.95,...) {
   with(object, {
     se <- sqrt(diag(vcov))
     tval <- qt(1-(1-level)/2, df=df.residual, lower.tail=TRUE)
@@ -154,9 +164,11 @@ confint.mylm <- function(object, parm=NULL, level=0.95) {
 #' Fitted values
 #'
 #' @param object object of class "mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-fitted.mylm <- function(object) {
+fitted.mylm <- function(object,...) {
   with(object, {
     return(fitted.values)
   })
@@ -165,9 +177,11 @@ fitted.mylm <- function(object) {
 #' Residuals
 #'
 #' @param object object of class "mylm"
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
-residuals.mylm <- function(object) {
+residuals.mylm <- function(object,...) {
   with(object, {
     return(residuals)
   })
@@ -184,11 +198,13 @@ residuals.mylm <- function(object) {
 #' @param interval Type of interval calculation, can be "none", "confidence" or "prediction". Can be abbreviated.
 #'
 #' @param level The confidence level required (default = 0.95).
+#' 
+#' @param ... additional arguments to be passed to methods
 #'
 #' @export
 predict.mylm <- function(object, newdata=NULL, se.fit=FALSE,
                          interval=c("none", "confidence", "prediction"),
-                         level=0.95) {
+                         level=0.95,...) {
   with(object, {
     if(is.null(newdata)) newdata <- object$data
     xmat.new <- model.matrix(object$formula, data=newdata)

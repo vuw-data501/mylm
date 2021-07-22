@@ -4,10 +4,12 @@
 \alias{fitted.mylm}
 \title{Fitted values}
 \usage{
-\method{fitted}{mylm}(mylmobj)
+\method{fitted}{mylm}(object, ...)
 }
 \arguments{
-\item{mylmobj}{mylm object}
+\item{object}{object of class "mylm"}
+
+\item{...}{additional arguments to be passed to methods}
 }
 \description{
 Fitted values

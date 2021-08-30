@@ -125,7 +125,7 @@ print.summary.mylm <- function(x,...) {
   invisible()
 }
 
-#' Variance covariance matricx for parameters
+#' Variance covariance matrix for parameters
 #'
 #' @param object object of class "mylm"
 #' 
@@ -209,6 +209,7 @@ predict.mylm <- function(object, newdata=NULL, se.fit=FALSE,
     if(is.null(newdata)) newdata <- object$data
     xmat.new <- model.matrix(object$formula, data=newdata)
     fitval <- as.vector(xmat.new%*%object$coef)
+    names(fitval) <- rownames(xmat.new)
     retval <- list(fit=fitval)
     if(se.fit || interval!="none") {
        se.val <- sqrt(diag(xmat.new%*%vcov%*%t(xmat.new)))
@@ -237,12 +238,20 @@ predict.mylm <- function(object, newdata=NULL, se.fit=FALSE,
 #'
 #' @export
 plot.mylm <- function(x, ...) {
+  pask <- par()$ask
+  par(ask=TRUE)
   with(x, {
     plot(data[,yname], fitted.values,
          xlab="Observed", ylab="Fitted",
          ...)
     abline(a=0, b=1, ...)
+    
+    qqnorm(residuals)
+    abline(a=0, b=1, lty=4)
+    
+    hist(residuals)
   })
+  par(ask=pask)
   invisible()
 }
 

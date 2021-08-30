@@ -1,0 +1,41 @@
+---
+title: "Develop"
+author: "Richard Arnold"
+date: "13/08/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(mylm)
+source("first.R")
+reload()
+```
+
+```{r}
+data(trees)
+plot(trees$Volume, trees$Girth)
+pairs(trees)
+```
+```{r}
+lm1 <- lm(Girth ~ Volume + Height, data=trees)
+slm1 <- summary(lm1)
+lm1
+slm1
+```
+
+```{r}
+mylm1 <- mylm(Girth ~ Volume + Height, data=trees)
+smylm1 <- summary(mylm1)
+mylm1
+smylm1
+```
+
+```{r}
+plot(lm1)
+plot(mylm1)
+```
+

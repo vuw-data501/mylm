@@ -8,14 +8,19 @@
 #'
 #' @export
 mylm <- function(formula, data, subset=NULL) {
+  
 
   if(!is.null(subset)) data <- data[subset,]
-
   yname <- as.character(formula[[2]])
+  if (any(!(all.vars(formula) %in% names(data)))) stop(paste(paste(all.vars(formula)[!(all.vars(formula) %in% names(data))], collapse = " and "), "are named in formula but not present in data, please check formula")
+) 
   yvec <- data[,yname]
   xmat <- model.matrix(formula, data=data)
   df.residual <- nrow(xmat)-ncol(xmat)
 
+
+  
+  
   xxinv <- solve(t(xmat)%*%xmat)
   coef <- as.vector(xxinv%*%t(xmat)%*%yvec)
   names(coef) <- colnames(xmat)

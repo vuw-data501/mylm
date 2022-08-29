@@ -13,6 +13,7 @@ RoxygenNote: 7.1.1
 LinkingTo: 
     Rcpp
 Imports: 
+    stats,
     Rcpp
 Suggests: 
     testthat (>= 3.0.0)

@@ -7,13 +7,37 @@
 #' @param subset an optional vector specifying a subset of observations to be used in the fitting process.
 #'
 #' @export
+
+
+
 mylm <- function(formula, data, subset=NULL) {
   
-
   if(!is.null(subset)) data <- data[subset,]
+  
+  if (any(!(all.vars(formula) %in% names(data)))) stop(paste(paste(all.vars(formula)[!(all.vars(formula) %in% names(data))], collapse = " and "), "are named in formula but not present in data, please check formula"))
+  
+  data <- data[all.vars(formula)]
+  if(any(!(sapply(data, class) %in% c("numeric","factor", "interger")))) stop(paste(paste(names(data)[!(sapply(data, class) %in% c("numeric","factor", "interger"))], collapse = " and "), "are not numeric, integer or factor variables, please reconsider"))
+  
+  if(sum(rowSums(is.na(data)) != 0) != 0) warning(paste(sum(rowSums(is.na(data)) != 0), "data points contain at least 1 null value and so will not be considered"))
+  data <- data[rowSums(is.na(data))== 0,]
+  
+  if(nrow(data)  <= 2 & nrow(data)) stop("2 or fewer data points, technique not suitable")
+  if(nrow(data)  >= 2 & nrow(data) <= 5) warning("2 to 5 data points, technique may not be suitable")
+  
+  
   yname <- as.character(formula[[2]])
-  if (any(!(all.vars(formula) %in% names(data)))) stop(paste(paste(all.vars(formula)[!(all.vars(formula) %in% names(data))], collapse = " and "), "are named in formula but not present in data, please check formula")
-) 
+  predictor_data <- data[setdiff(all.vars(formula), yname)]
+  
+  factored_data <- predictor_data[names(predictor_data)[sapply(predictor_data, class) %in% c("factor")]]
+  if(any(unlist(lapply(factored_data, function(x)all(duplicated(x)[-1L]))))) stop("catagorical with only 1 factor detected, please remove and try again")
+  rm(factored_data)
+  
+  
+  if(any(sapply(predictor_data[names(predictor_data)[sapply(predictor_data, class) %in% c("numeric", "interger")]], sd) == 0)) stop("numeric predictor variable with 0 variance detected, please remove and try again")
+  rm(predictor_data)
+  
+  
   yvec <- data[,yname]
   xmat <- model.matrix(formula, data=data)
   df.residual <- nrow(xmat)-ncol(xmat)

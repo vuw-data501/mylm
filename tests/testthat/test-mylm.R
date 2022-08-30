@@ -8,8 +8,16 @@ data_tests<- data.frame(z = as.factor(c(NA, "hello", "hello", "hello", "orange",
                         x = c(2,2,2,2,2,2,2,2,2,2),
                         y = c(0,1,2,3,4,5,6,8,9,10),
                         a = as.factor(c("hey", "hey", "hey", "hey", "hey","hey", "hey", "hey", "hey", "hey")),
-                        b = c(2,3,4,5,6,7,8,9,10,11))
+                        b = c(2,3,4,5,6,7,8,9,10,11),
+                        c1 = c(1,2,3,4,5,6,7,8,9,10),
+                        c2 = c(1,2,3,4,5,6,7,8,9,10))
 
+
+test_that("subsetting is possible", {
+  expect_error(mylm(Sepal.Length ~ Sepal.Width, iris, subset = c(1:(nrow(iris)+1))), "Subset stated is larger than the input dataset, please correct")
+  expect_error(mylm(Sepal.Length ~ Sepal.Width, iris, subset = c("hello", "my", "name", "is", "slim")),"Non numeric vector input please correct")
+  expect_error(mylm(Sepal.Length ~ Sepal.Width, iris, subset = list(1,2,3,4)),"Non numeric vector input please correct")
+})
 
 test_that("formula only contains names of variables present", {
   expect_error(mylm(fake.variable ~ Sepal.Length + Petal.Length, iris), "fake.variable are named in formula but not present in data, please check formula")
@@ -29,6 +37,7 @@ test_that("data characteristic warnings and errors work", {
   expect_error(mylm(y ~ x + b, data_tests, subset= c(3:10)),"numeric predictor variable with 0 variance detected, please remove and try again")
   expect_error(mylm(y ~ y + a, data_tests, subset= c(3:10)),"catagorical with only 1 factor detected, please remove and try again")
   expect_error(mylm(y ~ a, data_tests, subset= c(3:10)),"catagorical with only 1 factor detected, please remove and try again")
+  expect_error(mylm(y ~ c1 + c2, data_tests), "Perfect corrolation detected between predictor variables, can not compute")
 })
 
 
@@ -37,6 +46,7 @@ test_that("data characteristic warnings and errors work", {
 test_that("returns correct type of values", {
   expect_type(mylm(Petal.Width ~ Sepal.Length + Petal.Length, iris), "list")
   expect_length(mylm(Petal.Width ~ Sepal.Length + Petal.Length, iris), 11)
+  
 })
 
 

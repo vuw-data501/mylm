@@ -1,17 +1,14 @@
-#Input Checks
+
+#data
 
 data(iris)
+data(data_tests)
 data_characters <- iris
 data_characters$character_species <- as.character(data_characters$Species)
 data_characters$character_speciesb <- as.character(data_characters$Species)
-data_tests<- data.frame(z = as.factor(c(NA, "hello", "hello", "hello", "orange", "orange", "orange", "orange", "orange", "orange")),
-                        x = c(2,2,2,2,2,2,2,2,2,2),
-                        y = c(0,1,2,3,4,5,6,8,9,10),
-                        a = as.factor(c("hey", "hey", "hey", "hey", "hey","hey", "hey", "hey", "hey", "hey")),
-                        b = c(2,3,4,5,6,7,8,9,10,11),
-                        c1 = c(1,2,3,4,5,6,7,8,9,10),
-                        c2 = c(1,2,3,4,5,6,7,8,9,10))
 
+
+#Input Checks
 
 test_that("subsetting is possible", {
   expect_error(mylm(Sepal.Length ~ Sepal.Width, iris, subset = c(1:(nrow(iris)+1))), "Subset stated is larger than the input dataset, please correct")
@@ -46,11 +43,22 @@ test_that("data characteristic warnings and errors work", {
 test_that("returns correct type of values", {
   expect_type(mylm(Petal.Width ~ Sepal.Length + Petal.Length, iris), "list")
   expect_length(mylm(Petal.Width ~ Sepal.Length + Petal.Length, iris), 11)
-  
 })
 
 
-
+x <- mylm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, iris)
+names(x)
+x$call
+x$formula
+x$data
+x$yname
+x$coef
+x$sigma
+x$vcov
+x$npar
+x$df.residual
+x$residuals
+x$fitted.values
 
 
 

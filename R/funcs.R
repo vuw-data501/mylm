@@ -32,18 +32,22 @@ mylm <- function(formula, data, subset=NULL) {
   yname <- as.character(formula[[2]])
   predictor_data <- data[setdiff(all.vars(formula), yname)]
   
-  cormat <- cor(predictor_data)
-  diag(cormat) <- NA
-  if(any(cormat == 1.00, na.rm = T)) stop("Perfect corrolation detected between predictor variables, can not compute")
-  rm(cormat)
+  
   
   
   factored_data <- predictor_data[names(predictor_data)[sapply(predictor_data, class) %in% c("factor")]]
+  
   if(any(unlist(lapply(factored_data, function(x)all(duplicated(x)[-1L]))))) stop("catagorical with only 1 factor detected, please remove and try again")
   rm(factored_data)
   
   
   if(any(sapply(predictor_data[names(predictor_data)[sapply(predictor_data, class) %in% c("numeric", "interger")]], sd) == 0)) stop("numeric predictor variable with 0 variance detected, please remove and try again")
+  
+  cormat <- cor(predictor_data[names(predictor_data)[sapply(predictor_data, class) %in% c("numeric", "interger")]])
+  diag(cormat) <- 0
+  cormat[is.na(cormat)] <- 0
+  if(any(cormat >= 0.99999999, na.rm = T)) stop("Perfect corrolation detected between predictor variables, can not compute")
+  rm(cormat)
   rm(predictor_data)
   
   

@@ -1,4 +1,5 @@
 #' Fit a linear model
+#' Add an additional comment here.
 #'
 #' @param formula an object of class "formula" (or one that can be coerced to that class) a symbolic description of the model to be fitted. The details of model specification are given under ‘Details’.
 #'
